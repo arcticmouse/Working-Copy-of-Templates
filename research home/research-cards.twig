@@ -1,0 +1,79 @@
+1<section class="cards container tight-grid">
+  <div class="row">
+    {% set card = cards[0] %}
+    <a href="{{ card.url }}" class='shorter {{card.style}} card'>
+        <picture>
+          <source srcset="{{ card.images.featured.src }}" media="(min-width: 1000px)">
+          <source srcset="{{ card.images.card.src }}" media="(min-width: 700px)">
+          <source srcset="{{ card.images.wide_card.src }}" media="(min-width: 500px)">
+          <img srcset="{{ card.images.wide_card.src }}" alt="">
+        </picture>
+      <div class="content">
+        <p class="school">{{ card.cat.name }}</p>
+        <h4>{{ card.title }}</h4>
+        <p class="snippet">{{card.excerpt|excerpt(15)}}</p>
+      </div>
+    </a>
+    <div class="link-list panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title larger">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Research Links
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+      <a href="/research/?page_id=20020">Health Institutes of Texas</a>
+      <a href="/research/?page_id=200011607">Research Centers and Institutes</a>
+      <a href="/research/?page_id=20013">Clinical Trials</a>
+      <a href="/research/?page_id=200226">Grant & Contract Management</a>
+      <a href="/research/?page_id=200263">Research Compliance</a>
+      <a href="/research/?page_id=2002263244">Research Funding</a>
+        </div>
+      </div>
+
+    </div>
+
+
+  <div class="short cards">
+    {% set these_cards = [cards[1], cards[2], cards[3]]  %}
+    {% for card in these_cards %}
+      {% block card_block %}
+        <a href="{{ card.url }}" class='{{card.style}} card'>
+          <picture>
+            <source srcset="{{ card.images.card.src }}" media="(min-width: 700px)">
+            <source srcset="{{ card.images.wide_card.src }}" media="(min-width: 500px)">
+            <img srcset="{{ card.images.wide_card.src }}" alt="">
+          </picture>
+          <div class="content">
+            <h4>{{ card.title }}</h4>
+          </div>
+        </a>
+      {% endblock %}
+    {% endfor %}
+  </div>
+
+    <div class='flat contact card'>
+      <div class="content">
+        <h4>Contact</h4>
+        <p><a href="/research/?page_id=200011606" />Have questions about UNTHSC Research? Contact us.</a></p>
+      </div>
+    </div> <!-- /.card -->
+
+</div> <!-- /.row -->
+
+
+  <div class="more tall cards">
+    {% set these_cards = [cards[5], cards[6], cards[7], cards[8]]  %}
+      {% for card in these_cards %}
+        {{ block('card_block') }}
+      {% endfor %}
+  </div>
+
+
+</section> <!-- end article header -->
+
+
+
+
