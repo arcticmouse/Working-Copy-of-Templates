@@ -1,0 +1,29 @@
+<section class="container">
+	{% for r in results %}
+		<div class="container-fluid">
+			<div class="col-xs-2">
+				<a href="{{ r.url }}">{{ r.thumb }}</a>
+			</div>
+
+			<div class="col-xs-10">
+				<section class="post_content">
+					<h3 class="h2"><a href="{{ r.url }}" rel="bookmark">{{ r.fname }} {{ r.lname }}</a></h3>
+					<strong>
+					{% for m in r.med_deg %}
+						{{ m }}  
+					{% endfor %}
+					</strong><br /><br />
+					
+					{{ r.phone }}<br />
+
+					{% for l in r.locations %}
+						{{ l }} 
+					{% endfor %}
+					<br />
+					<a href="{{ r.url }}">View Profile</a>
+				</section>
+			</div>
+		</div>
+		<br /><br />
+	{% endfor %}
+</section>

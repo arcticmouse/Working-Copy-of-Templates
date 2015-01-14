@@ -1,0 +1,30 @@
+
+.phys_filter_name, .phys_filter_language, .phys_filter_specialty {
+    float: left;
+}
+.phys_filter_name div, .phys_filter_language div, .phys_filter_specialty div {
+    border-radius: 5px;
+    float: left;
+    margin: 1em;
+    padding: 1em;
+    text-align: center;
+    background-color: #eeeeee;
+}
+.phys_filter_name ul, .phys_filter_language ul, .phys_filter_specialty ul {
+    margin-bottom: 2em;
+    width: 100%;
+}
+.phys_filter_name ul li, .phys_filter_language ul li, .phys_filter_specialty ul li {
+    background-color: #cccccc;
+    float: left;
+    list-style-type: none;
+    margin-left: 0.5em;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+.phys_filter_name ul li:before, .phys_filter_language ul li:before, .phys_filter_specialty ul li:before {
+    content: "";
+}
