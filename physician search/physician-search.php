@@ -35,6 +35,10 @@
 					?>
 
 				</div>
+
+				<div class="row">
+					<div class="col-xs-offset-1"><br /><br /><iframe src="https://www.google.com/maps/d/embed?mid=zlTnU0ilWcE4.kfGX1KfQWYwQ"></iframe></div>
+				</div>
 			
 				<footer>
 
