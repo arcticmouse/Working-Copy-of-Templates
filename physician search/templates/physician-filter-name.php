@@ -17,11 +17,13 @@ if( !taxonomy_exists( 'specialty' ) )
 		'post_type' => 'bios', 
 		'order' => 'ASC', 
 		'orderby' => 'title', 
-		'meta_query' => array(
-			'key'		=> '_cmbi_emp_type', 
-			'value' 	=> 'physician',
-			'compare'	=> 'in'  
-			),
+		'tax_query'	=> array(
+	    	array(
+		    	'taxonomy' => 'emp_type',
+		    	'field' =>	'slug',
+		    	'terms' => 'physician',
+		    	),
+			), //end tax wquery
 		);
 	$query = new WP_Query( $args );
 
@@ -33,7 +35,8 @@ if( !taxonomy_exists( 'specialty' ) )
 		echo '<h3>By Last Name</h3>';
 
 		while ( $query->have_posts() ) : $query->the_post(); 
-
+		var_dump($post);
+		echo '<hr>';
 		#get the data for name
 		$post_id = $post->ID;
 		$lname = $post->post_title;
@@ -117,7 +120,6 @@ if( $wp_taxonomies['specialty'] == 'delete' )
 	unset( $wp_taxonomies['specialty'] );
 
 restore_current_blog();
-
 	$p_name = Timber::get_context();
 	$p_name['letters'] = $letters;
 	$p_name['phys'] = $phys;

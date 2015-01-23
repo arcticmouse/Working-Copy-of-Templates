@@ -10,8 +10,8 @@
 				</div><br />
 					
 				<div class="row">
-						<div class="col-xs-2">By Specialty</div>
 						<select name="specialty" id="specialty" class="col-xs-6">
+							<option selected disabled hidden value=''>by SPECIALTY</option>
 							<?php
 								#get_terms in switch to blog doesnt work, lines 6-8 & 114-115 make and delete a fake taxonomy in current blog
 								#http://wordpress.stackexchange.com/questions/98247/get-post-by-term-from-custom-taxonomy-in-another-blog-on-the-network
@@ -32,8 +32,8 @@
 					</div><br />
 
 					<div class="row">
-						<div class="col-xs-2">By Language</div>
 						<select name="language" id="language" class="col-xs-6">
+							<option selected disabled hidden value=''>by LANGUAGE</option>
 							<?php
 
 								#get_terms in switch to blog doesnt work, lines 6-8 & 114-115 make and delete a fake taxonomy in current blog
@@ -57,8 +57,8 @@
 					</div><br />
 
 					<div class="row">
-						<div class="col-xs-2">By Location</div>
 	 					<select name="location" id="location" class="col-xs-6">
+	 						<option selected disabled hidden value=''>by LOCATION</option>
 							<?php
 
 								#get_terms in switch to blog doesnt work, lines 6-8 & 114-115 make and delete a fake taxonomy in current blog
@@ -83,7 +83,7 @@
 
 
 				<input type="hidden" name="post_type" value="bios" />
-				<input type="hidden" name="_cmbi_emp_type" value="physician" />
+				<input type="hidden" name="emp_type_physician" value="on" />
 				<br /><br />
 				<button type="submit" class="btn btn-primary"><?php _e("Search for Physician","bonestheme"); ?></button>
 			</div>

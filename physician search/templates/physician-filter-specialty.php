@@ -28,18 +28,19 @@ if( !taxonomy_exists( 'specialty' ) )
 
 		$args = array( 
 			'post_type' => 'bios', 
-			'meta_query' => array(
-				'key'		=> '_cmbi_emp_type', 
-				'value' 	=> 'physician',
-				'compare'	=> 'in'  
-				),
 			'tax_query'	=> array(
+				'relation' => 'AND',
 				array(
 					'taxonomy'	=> 'specialty',
 					'field'		=> 'slug',
 					'terms'		=> $r->slug,
-					)
-				)
+					),
+		    	array(
+			    	'taxonomy' => 'emp_type',
+			    	'field' =>	'slug',
+			    	'terms' => 'physician',
+			    	),
+				), //end tax wquery
 			);
 
 		$post_list = get_posts( $args );
