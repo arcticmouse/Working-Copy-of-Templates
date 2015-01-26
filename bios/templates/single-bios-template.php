@@ -39,8 +39,11 @@ $image = get_the_post_thumbnail( $post_id );
 
 //create title name
 $name = get_post_meta( $post_id, '_cmbi_fname', true ) . ' ';
-$name .=  get_the_title() . ', ';
-$name .= get_post_meta( $post_id, '_cmbi_non_med_degree', true);
+$name .=  get_the_title();
+$nmd = get_post_meta( $post_id, '_cmbi_non_med_degree', true);
+if ( !empty( $nmd ) ){
+	$name .= ', ' . $nmd;
+}
 	
 $med = get_post_meta( $post_id, '_cmbi_med_degree', true);				
 #$degrees = get_the_data( $med[0], 'med_degree' );
@@ -48,7 +51,7 @@ $med = get_post_meta( $post_id, '_cmbi_med_degree', true);
 if ( !empty($med) ){
 	$last = count($med);
 	$i = 1;
-
+	$name .= ', ';
 	foreach( $med as $deg ) {
 		$d = get_term_by( 'id', $deg, 'med_degree' );
 		if ( $i == $last ) {
@@ -77,14 +80,15 @@ foreach( $spec as $s ){
 
 
 //get quote
-$quote = '<strong>' . get_post_meta( $post_id, '_cmbi_quote', true ) . '</strong>';
-if ( $quote ) {
-	$quote .= '<br />-' . $name;
-} else $quote = '';
+$quote = get_post_meta( $post_id, '_cmbi_quotation', true );
+
 
 $fname = get_post_meta( $post_id, '_cmbi_fname', true );
 $qc = get_post_meta( $post_id, '_cmbi_quote_color', true );
+
 $titles = get_post_meta( $post_id, '_cmbi_titles', true );
+$titles = explode( "\n", $titles);
+
 $dept = get_post_meta( $post_id, '_cmbi_department', true );
 $fphone = get_post_meta( $post_id, '_cmbi_fphone', true );
 $email = get_post_meta( $post_id, '_cmbi_email', true );
