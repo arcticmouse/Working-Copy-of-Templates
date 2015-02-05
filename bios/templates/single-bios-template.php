@@ -80,13 +80,13 @@ foreach( $spec as $s ){
 
 
 //get quote
-$quote = get_post_meta( $post_id, '_cmbi_quotation', true );
+$quote 		= get_post_meta( $post_id, '_cmbi_quotation', true );
 
 
-$fname = get_post_meta( $post_id, '_cmbi_fname', true );
-$qc = get_post_meta( $post_id, '_cmbi_quote_color', true );
+$fname 		= get_post_meta( $post_id, '_cmbi_fname', true );
+$qc 		= get_post_meta( $post_id, '_cmbi_quote_color', true );
 
-$titles = get_post_meta( $post_id, '_cmbi_titles', true );
+$titles     = get_post_meta( $post_id, '_cmbi_titles', true );
 $titles = explode( "\n", $titles);
 
 $dept = get_post_meta( $post_id, '_cmbi_department', true );
@@ -97,6 +97,12 @@ $biog = get_post_meta( $post_id, '_cmbi_biography', true );
 $acad = get_post_meta( $post_id, '_cmbi_academics', true );
 $hon = get_post_meta( $post_id, '_cmbi_honors', true );
 $eis = get_post_meta( $post_id, '_cmbi_eis', true );
+
+$photo = get_post_meta( $post_id, 'eis_photo_link', true);
+if ( $photo ) {
+	$eis_photo = '<img src="' . $photo . '">';
+} else $eis_photo = null;
+	
 
 $featured = get_post_meta( $post_id, '_cmbi_featured', true );
 
@@ -109,7 +115,7 @@ $single_bio['bios_spec'] = $bs;
 $single_bio['bios_quote'] = $quote;
 $single_bio['bios_fname'] = $fname;
 $single_bio['bios_quote_color'] = $qc;
-$single_bio['bios_titles'] = $titles;
+$single_bio['bios_titles'] = $titles[0];
 $single_bio['bios_department'] = $dept;
 $single_bio['bios_fphone'] = $fphone;
 $single_bio['bios_email'] = $email;
@@ -118,6 +124,7 @@ $single_bio['bios_biography'] = $biog;
 $single_bio['bios_academics'] = $acad;
 $single_bio['bios_honors'] = $hon;
 $single_bio['bios_eis'] = $eis;
+$single_bio['bios_eis_photo'] = $eis_photo;
 
 if ( $featured ) {
 	Timber::render( 'single-feature-bios.twig', $single_bio );

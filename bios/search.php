@@ -103,6 +103,11 @@
 												$k = 0;
 												while( $query->have_posts() ) : $query->the_post();
 													$post_id = get_the_ID();
+
+													$photo = get_post_meta( $post_id, 'eis_photo_link', true);
+													if ( $photo )
+														$eis_photo = '<img src="' . $photo . '">';
+
 													$results[$k]['thumb']	   = get_the_post_thumbnail();
 													$results[$k]['url']		   = get_the_permalink( $post_id );
 													$results[$k]['lname']	   = get_the_title();
@@ -112,6 +117,7 @@
 													$results[$k]['fax']        = get_post_meta( $post_id, '_cmbi_fax', true);
 													$results[$k]['department'] = get_post_meta( $post_id, '_cmbi_department', true);
 													$results[$k]['email']      = get_post_meta( $post_id, '_cmbi_email', true);
+													$results[$k]['eis_photo']  = $eis_photo;
 													$k++;
 												endwhile;
 											} 

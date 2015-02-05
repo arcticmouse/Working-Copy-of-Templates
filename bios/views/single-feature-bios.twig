@@ -17,10 +17,11 @@
 			{% endfor %}
 		</div>
 		<div class="col-sm-4 col-xs-12 bios_gray_red">
-			For an appointment: <strong>817-0735-DOCS (3627)</strong><br />
+			For an appointment: <a href="tel:+81707353627" /><strong>817-0735-DOCS (3627)</strong></a><br />
 			{{ bios_department }}<br />
 			{{ bios_fphone }}<br />
-			{{ bios_email }}<br />			
+			<a href="mailto:{{ bios_email }}" />{{ bios_email }}</a><br /><br />	
+			<a href="https://profile.hsc.unt.edu/profilesystem/viewprofile.php?pid={{ bios_eis }}" target="_blank" />Click for more profile information</a>		
 		</div>
 	</div><!--bios_gray-->
 

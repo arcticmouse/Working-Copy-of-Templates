@@ -26,49 +26,7 @@
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
-
-				<?php
-
-				$post_id = get_the_ID();
-
-				// Grab all the post meta values
-				$fname      = get_post_meta( $post_id, '_cmbi_fname', true );
-				$titles     = get_post_meta( $post_id, '_cmbi_titles', true);
-				$phone      = get_post_meta( $post_id, '_cmbi_fphone', true);
-				$fax        = get_post_meta( $post_id, '_cmbi_fax', true);
-				$department = get_post_meta( $post_id, '_cmbi_department', true);
-				$email      = get_post_meta( $post_id, '_cmbi_email', true);
-
-				?>
-
-				<div class="container-fluid">
-					<div class="row-fluid">
-
-						<div class="col-xs-12">
-							<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo $fname . ' ' . get_the_title(); ?></a></h3>
-						</div>
-						<div class="col-xs-2">
-							<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( 'thumbnail' ); ?></a>
-						</div>
-
-						<div class="col-xs-10">
-							<section class="post_content">
-								<strong><?php echo $titles; ?></strong><br /><br />
-								<strong>Department:</strong> <?php echo $department; ?><br /><br />
-								<?php echo $phone; ?> (ph)<br />
-								<?php echo $fax; ?> (fax)<br />
-								<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br /><br />
-								<a href="<?php the_permalink() ?>">View Profile</a>
-							</section>
-						</div>
-					</div>
-
-				</div>
-
-				<footer>
-
-				</footer> <!-- end article footer -->
-
+				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 			</article> <!-- end article -->
 
 			<?php endwhile; ?>

@@ -13,9 +13,8 @@
 				<select name="department" id="department" size=15>
 					<?php
 						//get posts
-						$args = array( 'post_type' => 'bios' );
+						$args = array( 'post_type' => 'bios',  'numberposts' => -1 );
 						$post_list = get_posts( $args );
-
 						//print out departments and list them
 						foreach( $post_list as $post ){
 							$d = get_post_meta( get_the_ID(), '_cmbi_department' );
