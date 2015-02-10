@@ -2,8 +2,10 @@
 	{% for r in results %}
 		<div class="container-fluid">
 			<div class="col-xs-1">
-				<br />
-				<a href="{{ r.url }}">{{ r.eis_photo }}</a>
+				{% if r.eis_photo %}
+					<br />
+					<a href="{{ r.url }}"><img src="{{ r.eis_photo }}" /></a>
+				{% endif %}
 			</div>
 			<div class="col-xs-4">
 					<h3 class="h2"><a href="{{ r.url }}" rel="bookmark">{{ r.fname }} {{ r.lname }}</a></h3>

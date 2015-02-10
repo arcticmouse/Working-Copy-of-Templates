@@ -45,11 +45,13 @@
 										/*	this is  the employee directory search code
 										/****************************************************/
 											?><h3>UNT Health Sciences Biographies Search Results</h3><br /><br /><?php
+											$fname = $lname = $type_arr = $dept = $sort = null;
 											#get data from form
 											$fname = $_GET['fname'];
 											$lname = $_GET['s'];
 											$type_arr = $_GET['emp_type'];
 											$dept = $_GET['department'];
+											$sort = $_GET['sort_opt'];
 
 											#set search variables if thats what the user is looking for 
 											#special case for post title, which isnt post_meta
@@ -58,13 +60,16 @@
 												$fn = sanitize_text_field( $fname );
 												$fname_arr = array(
 											            'key' => '_cmbi_fname',
-											            'value' => $fn,
-											            'compare' => 'LIKE'
+											            'value' => '^' . $fn,
+											            'compare' => 'REGEXP'
 											        	);
 											}
 											if ( $lname ){
 												$ln = sanitize_text_field( $lname );
 												$title_query = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE UCASE(post_title) LIKE '$ln%' OR UCASE(post_title) LIKE '%$ln%'" );
+											} 
+											if ( count( $title_query ) < 1 || !$lname ) {
+												$title_query = null;
 											}
 											if ( $dept ){
 												$dept_arr = array(
@@ -80,11 +85,34 @@
 														'terms' => $type_arr,
 													);
 											}
+											if ( $sort ){
+												switch( $sort ){
+													case 'fname':
+															$sort_key = '_cmbi_fname';
+															/*if ( !$fname_arr ) {
+																$fname_arr = array(
+																		'key' => '_cmbi_fname'
+																	);
+															}*/
+														break;
+													case 'lname':
+															$order_sort = "'orderby' => 'post-title'";
+														break;
+													case 'dept':
+															$sort_key = '_cmbi_department';
+															/*if ( !$dept_arr ) {
+																$dept_arr = array(
+																		'key' => '_cmbi_department'
+																	);
+															}*/
+														break;
+												};
+											}
 
 											#set args to query for
 											$args = array(
 											    'meta_query' => array(
-											        'relation' => 'OR',
+											        'relation' => 'AND',
 											        $fname_arr,
 											        $dept_arr,
 											    ), //end meta query
@@ -93,20 +121,19 @@
 											    ), //end taxonomy query
 											    'post_type' => 'bios',
 											    'post__in' => $title_query,
+											    'meta_key' => $sort_key,
+											    'orderby' => 'meta_value title',
+											    'order' => 'ASC',
 											); //end args
 
 											#query for args
 											$query = new WP_Query( $args );
-
+											
 											#if there are results loop through them and set variables to print
 								       		if ( $query->have_posts() ){
 												$k = 0;
 												while( $query->have_posts() ) : $query->the_post();
 													$post_id = get_the_ID();
-
-													$photo = get_post_meta( $post_id, 'eis_photo_link', true);
-													if ( $photo )
-														$eis_photo = '<img src="' . $photo . '">';
 
 													$results[$k]['thumb']	   = get_the_post_thumbnail();
 													$results[$k]['url']		   = get_the_permalink( $post_id );
@@ -117,7 +144,7 @@
 													$results[$k]['fax']        = get_post_meta( $post_id, '_cmbi_fax', true);
 													$results[$k]['department'] = get_post_meta( $post_id, '_cmbi_department', true);
 													$results[$k]['email']      = get_post_meta( $post_id, '_cmbi_email', true);
-													$results[$k]['eis_photo']  = $eis_photo;
+													$results[$k]['eis_photo']  = get_post_meta( $post_id, 'eis_photo_link', true);
 													$k++;
 												endwhile;
 											} 
