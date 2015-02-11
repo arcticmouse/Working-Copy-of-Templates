@@ -66,11 +66,11 @@
 											}
 											if ( $lname ){
 												$ln = sanitize_text_field( $lname );
-												$title_query = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE UCASE(post_title) LIKE '$ln%' OR UCASE(post_title) LIKE '%$ln%'" );
+												$title_query = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE UCASE(post_title) like '%$ln%'");
+
+												if ( count( $title_query ) < 1 ) 
+													$title_query = $ln; //kluge way to ensure no results from the qp_query.
 											} 
-											if ( count( $title_query ) < 1 || !$lname ) {
-												$title_query = null;
-											}
 											if ( $dept ){
 												$dept_arr = array(
 											            'key' => '_cmbi_department',
@@ -119,6 +119,7 @@
 											    'tax_query' => array(
 											    	$emp_arr,
 											    ), //end taxonomy query
+											    'posts_per_page' => -1,
 											    'post_type' => 'bios',
 											    'post__in' => $title_query,
 											    'meta_key' => $sort_key,
