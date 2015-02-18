@@ -1,0 +1,128 @@
+<div class="row">
+
+	<div class="no-padding col-sm-8 col-xs-12">
+		<img src="wp-content/uploads/sites/26/UNT-CAMP-CARTER-0001.jpg"><br />
+		<div>
+			<div class="no-padding col-xs-6">
+
+				<div class="light link-list panel panel-default">
+					<div class="panel-body">
+				        <h4 class="panel-title larger">
+				        <a class="academic">Academic Support</a></h4>
+
+				        <div class="panel">
+					        <a href="/patient-care/?page_id=2008775225922">Catalog</a>
+					        <a href="/patient-care/?page_id=2008773749">Center for Academic Performance</a>
+					        <a href="/patient-care/?page_id=2008775225907">Disability Accomodations</a>
+					        <a href="/patient-care/?page_id=2008773750">Library</a>
+					        <a href="/patient-care/?page_id=2008775225922">International Student <br />& Scholar Services</a>
+					        <a href="/patient-care/?page_id=2008773749">Transcripts</a>
+					        <a href="/patient-care/?page_id=2008775225907">Graduation</a>
+					        <a href="/patient-care/?page_id=2008773750">Canvas</a>
+					       	<a href="/patient-care/?page_id=2008775225922">myHSC</a>
+			             </div>
+
+				    </div>
+				</div>
+
+
+				<div class="light link-list panel panel-default">
+					<div class="panel-body">
+				        <h4 class="panel-title larger"><a class="resources">Resources</a></h4>
+
+				        <div id="collapseOne" class="panel-collapse">
+					        <a href="/patient-care/?page_id=2008775225922">Student Development</a>
+					        <a href="/patient-care/?page_id=2008773749">Career Services</a>
+					        <a href="/patient-care/?page_id=2008775225907">Health Promotion</a>
+					        <a href="/patient-care/?page_id=2008773750">Student Health Insurance</a>
+					        <a href="/patient-care/?page_id=2008775225922">Student Health Clinic</a>
+					        <a href="/patient-care/?page_id=2008775225922">Student Policies</a>
+					        <a href="/patient-care/?page_id=2008773749">Org Sync</a>
+					        <a href="/patient-care/?page_id=2008775225907">Student Organizations</a>
+			             </div>
+
+				    </div>
+				</div>
+
+			</div><!--span6-->
+			<div class="no-padding col-xs-6">
+
+				<div class="light link-list panel panel-default">
+					<div class="panel-body">
+				        <h4 class="panel-title larger">
+				        <a class="financial">Financial Services</a></h4>
+
+				        <div class="panel">
+					        <a href="/patient-care/?page_id=2008775225922">Financial Aid</a>
+					        <a href="/patient-care/?page_id=2008773749">Veteran Services</a>
+					        <a href="/patient-care/?page_id=2008775225907">Tuition & Fee Register</a>
+					        <a href="/patient-care/?page_id=2008773750">Student Financials</a>
+					        <a href="/patient-care/?page_id=2008775225922">Testing & Evaluation Services</a>
+			             </div>
+
+				    </div>
+				</div>
+
+
+				<div class="light link-list panel panel-default">
+					<div class="panel-body">
+				        <h4 class="panel-heading panel-title larger"><a class="other">Other Helpful Info</a></h4>
+
+				        <div id="collapseOne" class="panel-collapse">
+					        <a href="/patient-care/?page_id=2008775225922">Annual Security Report</a>
+					        <a href="/patient-care/?page_id=2008773749">Sexual Assault Support</a>
+					        <a href="/patient-care/?page_id=2008775225907">Housing</a>
+					        <a href="/patient-care/?page_id=2008773750">Well Connect</a>
+					        <a href="/patient-care/?page_id=2008775225922">UNTHSC Police Department</a>
+					        <a href="/patient-care/?page_id=2008775225922">Textbooks</a>
+					        <a href="/patient-care/?page_id=2008773749">Student Complaints</a>
+			             </div>
+
+				    </div>
+				</div>
+
+			</div><!--span6-->
+		</div><!--nameless div container for menus-->
+	</div> <!--span8-->
+	
+
+	<div class="no-padding col-sm-4 col-xs-12">
+
+		<div class="tall cards">
+		  {% set these_cards = [cards[1], cards[2]]  %}
+		  {% for card in these_cards %}
+		    {% block card_block %}
+		      <a href="{{ card.url }}" class='{{card.style}} card'>
+		        <picture>
+		          <source srcset="{{ card.images.card.src }}" media="(min-width: 700px)">
+		          <source srcset="{{ card.images.wide_card.src }}" media="(min-width: 500px)">
+		          <img srcset="{{ card.images.wide_card.src }}" alt="">
+		        </picture>
+		        <div class="content">
+		          <h4>{{ card.title }}</h4>
+		        </div>
+		      </a>
+		    {% endblock %}
+		  {% endfor %}
+		 </div><!-- end class tall cards-->
+
+			<div href="#" class='flat tall twitter card'>
+		      <div class="content">
+		        <h4>Twitter</h4>
+		         {% for tweet in twitterfeed %}
+		         	<p>{{ tweet }}</p>
+		         {% endfor %}
+		      </div>
+		    </div> <!-- /.card -->
+
+
+	  <div class="tall cards">
+	    {% set some_cards = [cards[3]]  %}
+	      {% for card in some_cards %}
+	        {{ block('card_block') }}
+	      {% endfor %}
+	  </div>
+
+	</div> <!--span4-->
+
+</row> <!--container row-->
